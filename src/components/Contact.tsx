@@ -16,7 +16,7 @@ const socials = [
   },
   {
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/gaida123",
     icon: Github,
   },
 ];

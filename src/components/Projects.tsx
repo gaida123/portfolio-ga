@@ -29,36 +29,40 @@ function DevpostIcon({ size = 18 }: { size?: number }) {
 
 const projects = [
   {
-    title: "LockedOut",
+    title: "Lockout",
     icon: Smartphone,
     tags: ["React", "Expo", "TypeScript", "Firebase", "Gemini Vision API"],
     description:
       "A student well-being mobile app leveraging social accountability to help students stay focused. Features AI-powered verification for study sessions using the Gemini Vision API, real-time progress tracking, and social challenges.",
-    image: null as string | null,
+    image:
+      "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/184/202/datas/medium.png",
     links: {
-      github: "https://github.com",
-      devpost: "https://devpost.com",
+      github: "https://github.com/keananwongso/projectlocked.",
+      devpost: "https://devpost.com/software/lockedout-5nge0b",
     },
   },
   {
-    title: "Inventory Management Database System",
+    title: "Bsystem",
     icon: Database,
     tags: ["Laravel", "Vue.js", "SQL", "Node.js"],
     description:
-      "An automated inventory management system that reduced manual data errors by 20%. Features server-side pagination for handling large datasets, role-based access control, and a clean dashboard for real-time stock monitoring.",
+      "An automated Inventory Management Database System that reduced manual data errors by 20%. Features server-side pagination for handling large datasets, role-based access control, and a clean dashboard for real-time stock monitoring in this Inventory Management Database System.",
     image: null as string | null,
     links: {
-      github: "https://github.com",
+      github: "https://github.com/gaida123",
     },
   },
   {
     title: "Minecraft Server Data Project",
     icon: Gamepad2,
-    tags: ["Custom Development", "Data Management"],
+    tags: ["R", "Classification", "Data Science", "Custom Development", "Data Management"],
     description:
-      "Custom development and data management solutions for a Minecraft server community. Built tools for player analytics, server configuration management, and community engagement tracking.",
-    image: null as string | null,
-    links: {} as Record<string, string>,
+      "Custom development and data management solutions for a Minecraft server community. Built tools for player analytics, demand forecasting, and community engagement tracking.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYv6B7SB9iUaNdbPJaFvYLoJj1_rd0BJO-Cw&s",
+    links: {
+      github: "https://github.com/gaida123",
+    },
   },
 ];
 

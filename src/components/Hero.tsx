@@ -183,7 +183,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-4xl text-center">
         <BlurFade delay={0.1} yOffset={8}>
           <p className="mb-4 font-mono text-sm tracking-[0.3em] text-accent-light uppercase sm:text-base">
-            Hi, Gaida here
+            Hi I am
           </p>
         </BlurFade>
 

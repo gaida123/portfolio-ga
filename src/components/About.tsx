@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Linkedin, Github, Mail, UserCircle } from "lucide-react";
+import { Download, Linkedin, Github, Mail } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 
 const actions = [
@@ -24,7 +24,7 @@ const actions = [
   },
   {
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/gaida123",
     icon: Github,
     style:
       "border border-border text-text-muted hover:border-accent/50 hover:text-text",
@@ -94,15 +94,14 @@ export default function About() {
             </BlurFade>
           </div>
 
-          {/* Right — photo placeholder */}
+          {/* Right — photo */}
           <BlurFade delay={0.4} inView>
             <div className="relative mx-auto h-64 w-64 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface sm:h-72 sm:w-72 lg:mx-0">
-              {/* Replace the placeholder below with an <img> once you have a photo:
-                  <img src="/photo.jpg" alt="Gaida Amzar" className="h-full w-full object-cover" /> */}
-              <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-text-muted/25">
-                <UserCircle size={48} strokeWidth={1.5} />
-                <span className="font-mono text-xs">Your photo</span>
-              </div>
+              <img
+                src="/images/about-photo.png"
+                alt="Gaida Amzar"
+                className="h-full w-full object-cover"
+              />
             </div>
           </BlurFade>
         </div>
