@@ -59,9 +59,9 @@ const projects = [
     description:
       "Custom development and data management solutions for a Minecraft server community. Built tools for player analytics, demand forecasting, and community engagement tracking.",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYv6B7SB9iUaNdbPJaFvYLoJj1_rd0BJO-Cw&s",
+      "images/dsci-project-background.png",
     links: {
-      github: "https://github.com/gaida123",
+      github: "https://github.com/gaida123/dsci-100-008-group-6/",
     },
   },
 ];
