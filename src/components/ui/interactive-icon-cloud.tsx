@@ -35,15 +35,6 @@ export const cloudProps = {
   },
 };
 
-const placeholderStyle: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-  paddingTop: 40,
-  minHeight: 280,
-};
-
 export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
   const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
   const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
@@ -72,21 +63,11 @@ type IconData = Awaited<ReturnType<typeof fetchSimpleIcons>>;
 
 export function IconCloud({ iconSlugs }: DynamicCloudProps) {
   const [data, setData] = useState<IconData | null>(null);
-  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
-  // Only render the Cloud on the client after mount. react-icon-cloud generates
-  // random UUIDs for canvas IDs, causing server/client hydration mismatch and
-  // the cloud to disappear on deployment when hydration fails.
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (mounted) {
-      fetchSimpleIcons({ slugs: iconSlugs }).then(setData);
-    }
-  }, [iconSlugs, mounted]);
+    fetchSimpleIcons({ slugs: iconSlugs }).then(setData);
+  }, [iconSlugs]);
 
   const renderedIcons = useMemo(() => {
     if (!data) return null;
@@ -96,10 +77,8 @@ export function IconCloud({ iconSlugs }: DynamicCloudProps) {
     );
   }, [data, theme]);
 
-  // Server and initial client render: placeholder with same layout (no random IDs).
-  // After mount, render the real Cloud so it never runs during SSR.
-  if (!mounted) {
-    return <div style={placeholderStyle} aria-hidden="true" />;
+  if (!data) {
+    return null;
   }
 
   return (

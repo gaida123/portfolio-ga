@@ -1,9 +1,22 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { motion, useInView } from "framer-motion";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { IconCloud } from "@/components/ui/interactive-icon-cloud";
+
+const IconCloud = dynamic(
+  () =>
+    import("@/components/ui/interactive-icon-cloud").then(
+      (mod) => mod.IconCloud
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative mx-auto flex w-full max-w-md items-center justify-center py-10" />
+    ),
+  }
+);
 
 const iconSlugs = [
   "html5",
