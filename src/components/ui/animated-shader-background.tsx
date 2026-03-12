@@ -10,25 +10,21 @@ const AnimatedShaderBackground = () => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Respect prefers-reduced-motion: render nothing expensive if user opts out.
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (prefersReducedMotion) return;
+
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-
-    const resize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      renderer.setPixelRatio(window.devicePixelRatio || 1);
-      renderer.setSize(width, height, false);
-      material.uniforms.iResolution.value.set(width, height);
-    };
-
-    container.appendChild(renderer.domElement);
 
     const material = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+          value: new THREE.Vector2(1, 1),
         },
       },
       vertexShader: `
@@ -102,21 +98,45 @@ const AnimatedShaderBackground = () => {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    const resize = () => {
+      const bounds = container.getBoundingClientRect();
+      const width = bounds.width || window.innerWidth;
+      const height = bounds.height || window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(width, height, false);
+      material.uniforms.iResolution.value.set(width * dpr, height * dpr);
+    };
+
+    container.appendChild(renderer.domElement);
+    resize();
+
     let frameId: number;
+    let running = true;
 
     const animate = () => {
+      if (!running) return;
       material.uniforms.iTime.value += 0.016;
       renderer.render(scene, camera);
       frameId = window.requestAnimationFrame(animate);
     };
 
-    resize();
-    animate();
+    const handleVisibility = () => {
+      running = !document.hidden;
+      if (running) {
+        frameId = window.requestAnimationFrame(animate);
+      }
+    };
 
     window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    frameId = window.requestAnimationFrame(animate);
 
     return () => {
+      running = false;
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.cancelAnimationFrame(frameId);
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

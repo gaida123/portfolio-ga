@@ -1,8 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowDown, Linkedin } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { TextShimmer } from "@/components/ui/text-shimmer";
@@ -50,9 +50,15 @@ function RotatingSubtitle() {
 }
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const isInView = useInView(sectionRef, { amount: 0.3, once: true });
+
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-      <AnimatedShaderBackground />
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
+    >
+      {isInView && <AnimatedShaderBackground />}
 
       {/* Radial gradient overlay for depth */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-background)_75%)]" />
