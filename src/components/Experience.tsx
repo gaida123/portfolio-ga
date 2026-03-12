@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Calendar } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
+import { Timeline, type TimelineEntry } from "@/components/ui/timeline";
 
 interface ExperienceItem {
   role: string;
@@ -69,6 +69,73 @@ const experiences: ExperienceItem[] = [
 ];
 
 export default function Experience() {
+  const data: TimelineEntry[] = experiences.map((exp) => {
+    const logoFill = exp.logoStyle === "fill";
+    const logoBoxClass = exp.logo
+      ? "overflow-hidden rounded-xl border border-border shadow-lg " +
+        (logoFill && !exp.company.includes("Asia Garment") ? "" : "bg-white")
+      : "";
+    const logoImgClass = exp.logo
+      ? logoFill
+        ? "h-full w-full object-cover"
+        : "h-full w-full object-contain p-1"
+      : "";
+
+    return {
+      title: exp.period,
+      content: (
+        <a
+          href={exp.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+        >
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-accent/30 hover:bg-surface-light sm:p-8">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
+              <div className="shrink-0">
+                {exp.logo ? (
+                  <div
+                    className={
+                      "relative h-12 w-12 sm:h-14 sm:w-14 " + logoBoxClass
+                    }
+                  >
+                    <Image
+                      src={exp.logo}
+                      alt={exp.company}
+                      width={56}
+                      height={56}
+                      className={logoImgClass}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${exp.color} text-base font-bold text-white shadow-lg sm:h-14 sm:w-14 sm:text-lg`}
+                  >
+                    {exp.initials}
+                  </div>
+                )}
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <h3 className="mb-1 text-base font-semibold leading-snug text-text sm:text-lg">
+                  {exp.role}
+                </h3>
+                <p className="mb-3 text-sm font-medium text-accent-light">
+                  {exp.company}
+                </p>
+                <p className="text-sm leading-relaxed text-text-muted">
+                  {exp.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 h-[2px] w-0 bg-gradient-to-r from-accent to-accent-light transition-all duration-500 group-hover:w-full" />
+          </div>
+        </a>
+      ),
+    };
+  });
+
   return (
     <section id="experience" className="relative px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl">
@@ -79,90 +146,12 @@ export default function Experience() {
         </BlurFade>
 
         <BlurFade delay={0.2} inView>
-          <h2 className="mb-12 text-4xl font-bold tracking-tight sm:mb-16 sm:text-5xl">
-            Experience /
-          </h2>
+          <Timeline
+            data={data}
+            heading="Experience /"
+            subheading="Roles and results across organizations, products, and platforms."
+          />
         </BlurFade>
-
-        <div className="space-y-5 sm:space-y-6">
-          {experiences.map((exp, i) => {
-            const logoFill = exp.logoStyle === "fill";
-            const logoContainWhite = exp.logoStyle === "contain-white";
-            const logoBoxClass = exp.logo
-              ? "overflow-hidden rounded-xl border border-border shadow-lg sm:h-14 sm:w-14 " +
-                (logoFill && !exp.company.includes("Asia Garment")
-                  ? ""
-                  : "bg-white")
-              : "";
-            const logoImgClass = exp.logo
-              ? logoFill
-                ? "h-full w-full object-cover"
-                : "h-full w-full object-contain p-1"
-              : "";
-            return (
-              <BlurFade key={exp.company} delay={0.3 + i * 0.12} inView>
-                <a
-                  href={exp.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:border-accent/30 hover:bg-surface-light"
-                >
-                  <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:gap-6 sm:p-8">
-                    {/* Company logo */}
-                    <div className="shrink-0">
-                      {exp.logo ? (
-                        <div
-                          className={
-                            "relative h-12 w-12 sm:h-14 sm:w-14 " + logoBoxClass
-                          }
-                        >
-                          <Image
-                            src={exp.logo}
-                            alt={exp.company}
-                            width={56}
-                            height={56}
-                            className={logoImgClass}
-                          />
-                        </div>
-                      ) : (
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${exp.color} text-base font-bold text-white shadow-lg sm:h-14 sm:w-14 sm:text-lg`}
-                        >
-                          {exp.initials}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="min-w-0 flex-1">
-                      <h3 className="mb-1 text-base font-semibold leading-snug sm:text-lg">
-                        {exp.role}
-                      </h3>
-                      <p className="mb-1 text-sm font-medium text-accent-light">
-                        {exp.company}
-                      </p>
-                      <div className="mb-3 flex items-center gap-1.5 text-xs text-text-muted sm:mb-4">
-                        <Calendar size={12} />
-                        <span className="font-mono">{exp.period}</span>
-                      </div>
-                      <p className="text-sm leading-relaxed text-text-muted">
-                        {exp.description}
-                      </p>
-                    </div>
-
-                    {/* Index number */}
-                    <span className="absolute right-5 top-5 font-mono text-xs text-text-muted/30 sm:relative sm:right-auto sm:top-auto">
-                      0{i + 1}
-                    </span>
-                  </div>
-
-                  {/* Hover accent line */}
-                  <div className="h-[2px] w-0 bg-gradient-to-r from-accent to-accent-light transition-all duration-500 group-hover:w-full" />
-                </a>
-              </BlurFade>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
