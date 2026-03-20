@@ -41,7 +41,7 @@ const iconSlugs = [
   "vercel",
 ];
 
-const languages = ["HTML / CSS", "JavaScript", "TypeScript", "PHP", "SQL"];
+const languages = ["HTML / CSS", "JavaScript", "TypeScript", "PHP", "R", "SQL"];
 const tools = [
   "React",
   "Vite",

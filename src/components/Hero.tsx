@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ArrowDown, Linkedin } from "lucide-react";
+import { ArrowDown, Download, Linkedin } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { TextShimmer } from "@/components/ui/text-shimmer";
 

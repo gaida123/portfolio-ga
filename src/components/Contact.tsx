@@ -2,6 +2,7 @@
 
 import { Mail, Linkedin, Github, ArrowUpRight } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
+import { Download } from "lucide-react";
 
 const socials = [
   {
@@ -47,16 +48,18 @@ export default function Contact() {
         </BlurFade>
 
         <BlurFade delay={0.5} inView>
-          <a
-            href="mailto:mgamzar@gmail.com"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-medium text-white transition-all hover:bg-accent-light hover:shadow-lg hover:shadow-accent/25"
-          >
-            Get In Touch
-            <ArrowUpRight
-              size={18}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </a>
+          <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <a
+              href="mailto:mgamzar@gmail.com"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-medium text-white transition-all hover:bg-accent-light hover:shadow-lg hover:shadow-accent/25"
+            >
+              Get In Touch
+              <ArrowUpRight
+                size={18}
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
+          </div>
         </BlurFade>
 
         <BlurFade delay={0.65} inView>
