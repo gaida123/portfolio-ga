@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   description:
     "Computer Science student at UBC. I build web platforms, e-commerce systems, and data tools.",
   alternates: { canonical: siteUrl },
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Gaida Amzar — Software Developer",
     description:
