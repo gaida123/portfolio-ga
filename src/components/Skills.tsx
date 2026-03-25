@@ -13,7 +13,7 @@ const IconCloud = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="relative mx-auto flex w-full max-w-md items-center justify-center py-10" />
+      <div className="relative mx-auto flex w-full max-w-sm items-center justify-center py-20" />
     ),
   }
 );
@@ -23,17 +23,20 @@ const iconSlugs = [
   "css3",
   "javascript",
   "typescript",
+  "python",
   "php",
   "mysql",
   "react",
   "vuedotjs",
   "nextdotjs",
+  "electron",
+  "fastapi",
   "vite",
   "expo",
   "firebase",
   "laravel",
-  "bootstrap",
   "tailwindcss",
+  "framer",
   "nodedotjs",
   "git",
   "github",
@@ -41,88 +44,71 @@ const iconSlugs = [
   "vercel",
 ];
 
-const languages = ["HTML / CSS", "JavaScript", "TypeScript", "PHP", "R", "SQL"];
-const tools = [
-  "React",
-  "Vite",
-  "Expo",
-  "Firebase",
-  "Laravel",
-  "Vue.js",
-  "Bootstrap",
-  "APIs",
-  "Postman",
-  "GitHub",
+const stack = [
+  {
+    label: "Languages",
+    items: "TypeScript, JavaScript, Python, HTML / CSS, SQL, PHP, R",
+  },
+  {
+    label: "Frontend",
+    items: "React 19, Next.js, Vite, Expo, Tailwind CSS, Framer Motion",
+  },
+  {
+    label: "Backend",
+    items: "FastAPI, Node.js, Laravel, WebSockets, REST APIs",
+  },
+  {
+    label: "Data & AI",
+    items: "Google GenAI, Gemini Vision, Fetch.ai uAgents, Web Speech API",
+  },
+  {
+    label: "Infrastructure",
+    items: "Firebase, Electron, Git, GitHub, Vercel, Postman",
+  },
 ];
 
 export default function Skills() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const cloudRef = useRef(null);
+  const isCloudInView = useInView(cloudRef, { once: true, margin: "-60px" });
 
   return (
-    <section id="skills" className="relative px-6 py-24 sm:py-32">
-      <div ref={ref} className="mx-auto max-w-5xl">
+    <section id="skills" className="relative px-6 py-24 sm:py-32 bg-surface">
+      <div className="mx-auto max-w-5xl">
         <BlurFade delay={0.1} inView>
-          <p className="mb-3 font-mono text-sm tracking-[0.3em] text-accent-light uppercase">
-            (02)
-          </p>
+          <hr className="rule mb-10" />
         </BlurFade>
-        <BlurFade delay={0.2} inView>
-          <h2 className="mb-12 text-4xl font-bold tracking-tight sm:mb-16 sm:text-5xl">
-            Skills & Tools /
+
+        <BlurFade delay={0.15} inView>
+          <h2 className="font-serif mb-10 text-3xl font-bold tracking-tight text-text sm:text-4xl">
+            Skills & Tools
           </h2>
         </BlurFade>
 
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          {/* Icon Cloud */}
+        <div className="grid items-center gap-8 lg:grid-cols-[1fr_360px] lg:gap-16">
+          <div className="divide-y divide-border border-y border-border">
+            {stack.map((row, i) => (
+              <BlurFade key={row.label} delay={0.2 + i * 0.07} inView>
+                <div className="grid grid-cols-[130px_1fr] gap-4 py-5 sm:grid-cols-[160px_1fr]">
+                  <span className="font-mono text-[10px] tracking-widest text-text-muted uppercase pt-0.5">
+                    {row.label}
+                  </span>
+                  <span className="text-base leading-relaxed text-text">
+                    {row.items}
+                  </span>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            ref={cloudRef}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={isCloudInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative mx-auto flex w-full max-w-md items-center justify-center"
+            className="relative flex items-center justify-center"
           >
-            <div className="absolute inset-0 rounded-full bg-accent/[0.03] blur-[60px]" />
             <IconCloud iconSlugs={iconSlugs} />
           </motion.div>
-
-          {/* Category lists */}
-          <div className="space-y-8">
-            <BlurFade delay={0.3} inView>
-              <div>
-                <h3 className="mb-4 font-mono text-xs tracking-[0.3em] text-accent-light uppercase">
-                  Languages
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {languages.map((lang) => (
-                    <span
-                      key={lang}
-                      className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-text-muted transition-colors hover:border-accent/40 hover:text-text"
-                    >
-                      {lang}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </BlurFade>
-
-            <BlurFade delay={0.45} inView>
-              <div>
-                <h3 className="mb-4 font-mono text-xs tracking-[0.3em] text-accent-light uppercase">
-                  Tools & Frameworks
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {tools.map((tool) => (
-                    <span
-                      key={tool}
-                      className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-text-muted transition-colors hover:border-accent/40 hover:text-text"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </BlurFade>
-          </div>
         </div>
       </div>
     </section>

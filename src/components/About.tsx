@@ -8,8 +8,7 @@ const actions = [
     label: "Resume",
     href: "/resume.pdf",
     icon: Download,
-    style:
-      "bg-accent text-white hover:bg-accent-light hover:shadow-lg hover:shadow-accent/25",
+    primary: true,
     download: true,
     external: false,
   },
@@ -17,8 +16,7 @@ const actions = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/gaida-amzar-3304a82b6/",
     icon: Linkedin,
-    style:
-      "border border-border text-text-muted hover:border-accent/50 hover:text-text",
+    primary: false,
     download: false,
     external: true,
   },
@@ -26,8 +24,7 @@ const actions = [
     label: "GitHub",
     href: "https://github.com/gaida123",
     icon: Github,
-    style:
-      "border border-border text-text-muted hover:border-accent/50 hover:text-text",
+    primary: false,
     download: false,
     external: true,
   },
@@ -35,8 +32,7 @@ const actions = [
     label: "Email",
     href: "mailto:mgamzar@gmail.com",
     icon: Mail,
-    style:
-      "border border-border text-text-muted hover:border-accent/50 hover:text-text",
+    primary: false,
     download: false,
     external: false,
   },
@@ -44,37 +40,35 @@ const actions = [
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-24 sm:py-32">
+    <section id="about" className="relative px-6 py-24 sm:py-32 bg-background">
       <div className="mx-auto max-w-5xl">
         <BlurFade delay={0.1} inView>
-          <p className="mb-3 font-mono text-sm tracking-[0.3em] text-accent-light uppercase">
-            (01)
-          </p>
+          <hr className="rule mb-10" />
         </BlurFade>
 
-        <BlurFade delay={0.2} inView>
-          <h2 className="mb-10 text-4xl font-bold tracking-tight sm:mb-14 sm:text-5xl">
-            About Me /
-          </h2>
-        </BlurFade>
-
-        {/* Bio + Photo row */}
-        <div className="grid items-start gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
-          {/* Left — paragraph + action buttons */}
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
           <div>
-            <BlurFade delay={0.35} inView>
-              <p className="mb-8 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">
+            <BlurFade delay={0.15} inView>
+              <h2 className="font-serif mb-6 text-3xl font-bold tracking-tight text-text sm:text-4xl">
+                About
+              </h2>
+            </BlurFade>
+
+            <BlurFade delay={0.25} inView>
+              <p className="mb-4 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">
                 I&apos;m a Computer Science student at the University of British
-                Columbia with a deep passion for full-stack development. From
-                building e-commerce platforms that drive real business growth to
-                creating mobile apps that foster student well-being, I thrive on
-                turning ideas into production-ready applications. I love working
-                at the intersection of clean design and robust engineering —
-                building things that are both beautiful and scalable.
+                Columbia, born in Bali, Indonesia. Before university I spent
+                three years building e-commerce and web platforms for local
+                businesses — real work, real deadlines, real clients.
+              </p>
+              <p className="mb-8 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">
+                I care about software that does what it says, loads fast, and
+                holds up under use. I&apos;m drawn to full-stack work, data
+                pipelines, and anything that ships to real users.
               </p>
             </BlurFade>
 
-            <BlurFade delay={0.5} inView>
+            <BlurFade delay={0.4} inView>
               <div className="flex flex-wrap gap-3">
                 {actions.map((action) => (
                   <a
@@ -84,9 +78,13 @@ export default function About() {
                     {...(action.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all ${action.style}`}
+                    className={`inline-flex items-center gap-2 rounded-none border px-5 py-2.5 text-sm font-medium transition-all ${
+                      action.primary
+                        ? "border-text bg-text text-background hover:bg-accent hover:border-accent"
+                        : "border-border text-text-muted hover:border-text hover:text-text"
+                    }`}
                   >
-                    <action.icon size={16} />
+                    <action.icon size={14} />
                     {action.label}
                   </a>
                 ))}
@@ -94,9 +92,9 @@ export default function About() {
             </BlurFade>
           </div>
 
-          {/* Right — photo */}
-          <BlurFade delay={0.4} inView>
-            <div className="relative mx-auto h-64 w-64 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface sm:h-72 sm:w-72 lg:mx-0">
+          <BlurFade delay={0.35} inView>
+            <div className="relative mx-auto h-60 w-60 shrink-0 overflow-hidden border border-border lg:mx-0 sm:h-72 sm:w-72">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/about-photo.png"
                 alt="Gaida Amzar"
@@ -105,24 +103,6 @@ export default function About() {
             </div>
           </BlurFade>
         </div>
-
-        {/* Highlight cards are temporarily commented out
-        <div className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-3 sm:gap-6">
-          {highlights.map((item, i) => (
-            <BlurFade key={item.title} delay={0.6 + i * 0.12} inView>
-              <div className="group h-full rounded-2xl border border-border bg-surface p-6 transition-all hover:border-accent/30 hover:bg-surface-light sm:p-8">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent-light transition-colors group-hover:bg-accent/20">
-                  <item.icon size={24} />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-text-muted">
-                  {item.description}
-                </p>
-              </div>
-            </BlurFade>
-          ))}
-        </div>
-        */}
       </div>
     </section>
   );

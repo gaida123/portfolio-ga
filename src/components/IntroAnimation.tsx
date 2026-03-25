@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
 
 export default function IntroAnimation({
   onComplete,
@@ -12,7 +11,8 @@ export default function IntroAnimation({
   const [counter, setCounter] = useState(0);
   const [exiting, setExiting] = useState(false);
 
-  const stableOnComplete = useCallback(onComplete, [onComplete]);
+  // eslint prefers an inline function expression for stable callbacks
+  const stableOnComplete = useCallback(() => onComplete(), [onComplete]);
 
   useEffect(() => {
     let frame: number;
@@ -51,18 +51,6 @@ export default function IntroAnimation({
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
         >
-          {/* Flickering grid background */}
-          <div className="absolute inset-0 opacity-60">
-            <FlickeringGrid
-              className="absolute inset-0 z-0 h-full w-full"
-              squareSize={4}
-              gridGap={6}
-              color="rgb(99, 102, 241)"
-              maxOpacity={0.4}
-              flickerChance={0.15}
-            />
-          </div>
-
           {/* Radial fade overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-background)_70%)]" />
 

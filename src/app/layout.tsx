@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 
-const siteUrl = "https://portfolio-ga.vercel.app";
+const siteUrl = "https://gaidaamzar.com";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,41 +15,43 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Gaida Amzar — Full-Stack Developer Portfolio",
+  title: "Gaida Amzar — Software Developer",
   description:
-    "Full-stack developer & UBC Computer Science student building scalable web apps, mobile experiences, and secure systems.",
-  alternates: {
-    canonical: siteUrl,
-  },
+    "Computer Science student at UBC. I build web platforms, e-commerce systems, and data tools.",
+  alternates: { canonical: siteUrl },
   openGraph: {
-    title: "Gaida Amzar — Full-Stack Developer",
+    title: "Gaida Amzar — Software Developer",
     description:
-      "Portfolio of web apps, Lockout, and data projects built for students and small businesses.",
+      "Portfolio of web platforms, mobile apps, and data projects by Gaida Amzar.",
     url: siteUrl,
-    siteName: "Gaida Amzar Portfolio",
+    siteName: "Gaida Amzar",
     type: "website",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gaida Amzar — Full-Stack Developer",
+    title: "Gaida Amzar — Software Developer",
     description:
-      "Showcase of scalable web apps, Lockout, and data projects.",
+      "Portfolio of web platforms, mobile apps, and data projects by Gaida Amzar.",
     images: ["/og-image.png"],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
       >
         <Providers>{children}</Providers>
       </body>

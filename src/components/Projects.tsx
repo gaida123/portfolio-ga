@@ -1,16 +1,10 @@
 "use client";
 
-import {
-  Github,
-  ImageIcon,
-  Smartphone,
-  Database,
-  Gamepad2,
-} from "lucide-react";
+import { Github, ArrowUpRight } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { motion } from "framer-motion";
 
-function DevpostIcon({ size = 18 }: { size?: number }) {
+function DevpostIcon({ size = 16 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -27,13 +21,46 @@ function DevpostIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-const projects = [
+interface Project {
+  title: string;
+  year: string;
+  tags: string[];
+  description: string;
+  image: string | null;
+  links: {
+    github?: string;
+    devpost?: string;
+    live?: string;
+  };
+}
+
+const projects: Project[] = [
+  {
+    title: "PolterGuide",
+    year: "2026",
+    tags: [
+      "React 19",
+      "Electron",
+      "FastAPI",
+      "WebSockets",
+      "Google GenAI",
+      "Fetch.ai",
+    ],
+    description:
+      "Agentic AI co-pilot that physically navigates SaaS dashboards via a Ghost Cursor. Parses uploaded PDFs into live onboarding flows with voice/chat commands and sub-100ms WebSocket streaming.",
+    image:
+      "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/486/714/datas/medium.png",
+    links: {
+      github: "https://github.com/gaida123/polter-guide/",
+      devpost: "https://devpost.com/software/polterguide",
+    },
+  },
   {
     title: "Lockout",
-    icon: Smartphone,
+    year: "2025",
     tags: ["React", "Expo", "TypeScript", "Firebase", "Gemini Vision API"],
     description:
-      "A student well-being mobile app leveraging social accountability to help students stay focused. Features AI-powered verification for study sessions using the Gemini Vision API, real-time progress tracking, and social challenges.",
+      "Student well-being mobile app using social accountability and AI-powered photo verification to confirm study sessions. Real-time feeds and social challenges built on Firebase.",
     image:
       "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/184/202/datas/medium.png",
     links: {
@@ -43,23 +70,22 @@ const projects = [
   },
   {
     title: "Bsystem",
-    icon: Database,
+    year: "2024",
     tags: ["Laravel", "Vue.js", "SQL", "Node.js"],
     description:
-      "An automated Inventory Management Database System that reduced manual data errors by 20%. Features server-side pagination for handling large datasets, role-based access control, and a clean dashboard for real-time stock monitoring in this Inventory Management Database System.",
-    image: null as string | null,
+      "Inventory management system with automated data entry, server-side pagination, role-based access control, and a real-time stock dashboard. Reduced manual data errors by 20%.",
+    image: null,
     links: {
       github: "https://github.com/gaida123",
     },
   },
   {
-    title: "Minecraft Server Data Project",
-    icon: Gamepad2,
-    tags: ["R", "Classification", "Data Science", "Custom Development", "Data Management"],
+    title: "Minecraft Server Analytics",
+    year: "2025",
+    tags: ["R", "Classification", "Data Science"],
     description:
-      "Custom development and data management solutions for a Minecraft server community. Built tools for player analytics, demand forecasting, and community engagement tracking.",
-    image:
-      "images/dsci-project-background.png",
+      "Player analytics and demand forecasting tools for a Minecraft server community. Built classification models and engagement tracking dashboards.",
+    image: "images/dsci-project-background.png",
     links: {
       github: "https://github.com/gaida123/dsci-100-008-group-6/",
     },
@@ -68,96 +94,99 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative px-6 py-24 sm:py-32">
+    <section id="projects" className="relative px-6 py-24 sm:py-32 bg-background">
       <div className="mx-auto max-w-5xl">
         <BlurFade delay={0.1} inView>
-          <p className="mb-3 font-mono text-sm tracking-[0.3em] text-accent-light uppercase">
-            (04)
-          </p>
+          <hr className="rule mb-10" />
         </BlurFade>
 
-        <BlurFade delay={0.2} inView>
-          <h2 className="mb-12 text-4xl font-bold tracking-tight sm:mb-16 sm:text-5xl">
-            Selected Works /
+        <BlurFade delay={0.15} inView>
+          <h2 className="font-serif mb-10 text-3xl font-bold tracking-tight text-text sm:text-4xl">
+            Selected Works
           </h2>
         </BlurFade>
 
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
+        <div className="divide-y divide-border border-y border-border">
           {projects.map((project, i) => (
-            <BlurFade key={project.title} delay={0.3 + i * 0.15} inView>
+            <BlurFade key={project.title} delay={0.2 + i * 0.1} inView>
               <motion.div
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/30"
+                whileHover={{ backgroundColor: "rgba(0,0,0,0.015)" }}
+                className="grid gap-6 py-8 sm:grid-cols-[1fr_280px] sm:gap-10"
               >
-                {/* Image area */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface-light">
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-text-muted/25">
-                      <ImageIcon size={36} strokeWidth={1.5} />
-                      <span className="font-mono text-xs">Coming soon</span>
-                    </div>
-                  )}
-
-                  {/* Overlay with links on hover */}
-                  {Object.keys(project.links).length > 0 && (
-                    <div className="absolute inset-0 flex items-center justify-center gap-3 bg-background/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                      {project.links.github && (
-                        <a
-                          href={project.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
-                          aria-label="GitHub"
-                        >
-                          <Github size={20} />
-                        </a>
-                      )}
-                      {project.links.devpost && (
-                        <a
-                          href={project.links.devpost}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
-                          aria-label="Devpost"
-                        >
-                          <DevpostIcon size={20} />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-5 sm:p-6">
-                  <div className="mb-3 flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent-light">
-                      <project.icon size={18} />
-                    </div>
-                    <h3 className="text-base font-semibold leading-tight sm:text-lg">
+                <div className="order-2 sm:order-1">
+                  <div className="mb-2 flex items-baseline gap-3">
+                    <h3 className="text-lg font-semibold text-text">
                       {project.title}
                     </h3>
+                    <span className="font-mono text-xs text-text-muted">
+                      {project.year}
+                    </span>
                   </div>
 
-                  <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">
+                  <p className="mb-4 text-sm leading-relaxed text-text-muted">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-accent/10 px-2.5 py-1 font-mono text-[11px] text-accent-light sm:px-3"
+                  <p className="mb-4 font-mono text-xs text-text-muted">
+                    {project.tags.join(" · ")}
+                  </p>
+
+                  <div className="flex flex-wrap gap-4">
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs text-text-muted transition-colors hover:text-accent"
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        <Github size={13} />
+                        GitHub
+                        <ArrowUpRight size={11} />
+                      </a>
+                    )}
+                    {project.links.devpost && (
+                      <a
+                        href={project.links.devpost}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs text-text-muted transition-colors hover:text-accent"
+                      >
+                        <DevpostIcon size={13} />
+                        Devpost
+                        <ArrowUpRight size={11} />
+                      </a>
+                    )}
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs text-text-muted transition-colors hover:text-accent"
+                      >
+                        Live
+                        <ArrowUpRight size={11} />
+                      </a>
+                    )}
                   </div>
+                </div>
+
+                <div className="order-1 sm:order-2">
+                  {project.image ? (
+                    <div className="aspect-[16/10] w-full overflow-hidden border border-border">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex aspect-[16/10] w-full items-center justify-center border border-border bg-surface">
+                      <span className="font-mono text-xs text-text-muted">
+                        No preview
+                      </span>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </BlurFade>
