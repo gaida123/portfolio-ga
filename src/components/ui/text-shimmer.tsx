@@ -27,9 +27,6 @@ export function TextShimmer({
 
   return (
     <MotionText
-      // Keep Motion element type static to satisfy eslint.
-      // The `as` prop changes the underlying element that gets rendered.
-      as={Component}
       className={cn(
         "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
         "text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#000]",
