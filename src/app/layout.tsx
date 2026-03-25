@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const siteUrl = "https://gaidaamzar.com";
 
@@ -53,7 +54,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );
