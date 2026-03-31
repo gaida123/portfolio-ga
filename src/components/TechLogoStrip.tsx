@@ -41,7 +41,7 @@ function IconTile({ Icon }: { Icon: IconType }) {
   return (
     <div
       role="listitem"
-      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line bg-white shadow-sm sm:h-12 sm:w-12"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-white shadow-sm sm:h-12 sm:w-12"
     >
       <Icon className="h-5 w-5 text-ink sm:h-6 sm:w-6" aria-hidden />
     </div>
@@ -95,7 +95,7 @@ export function TechLogoStrip() {
       `}</style>
 
       <div
-        className="techMarquee_wrap relative -mx-1 overflow-x-clip px-1 py-0.5"
+        className="techMarquee_wrap relative overflow-hidden py-0.5"
         role="list"
         aria-label="Technologies"
         data-lenis-prevent

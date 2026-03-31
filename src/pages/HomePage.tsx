@@ -161,13 +161,13 @@ export function HomePage() {
 
         <div className="mt-4 grid gap-4 lg:grid-cols-2 lg:gap-5">
           <motion.div
-            className="rounded-2xl border border-line bg-white px-4 pb-3 pt-4 shadow-sm sm:px-5 sm:pb-4 sm:pt-5"
+            className="rounded-2xl border border-line bg-white p-4 shadow-sm sm:p-5"
             {...fade}
           >
             <TechLogoStrip />
           </motion.div>
           <motion.div
-            className="rounded-2xl border border-line bg-white p-5 shadow-sm sm:p-5"
+            className="rounded-2xl border border-line bg-white p-4 shadow-sm sm:p-5"
             {...fade}
             transition={{ ...fade.transition, delay: 0.05 }}
           >
