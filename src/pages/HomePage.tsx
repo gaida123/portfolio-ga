@@ -18,9 +18,21 @@ const fade = {
 };
 
 const reading = [
-  { title: "Agentic UIs & Ghost Cursors", note: "Shipping PolterGuide-style flows" },
-  { title: "Web performance & Core Web Vitals", note: "Real client sites" },
-  { title: "Firebase + mobile social patterns", note: "Lockout & real-time feeds" },
+  { 
+    title: "AI Stock Investing - How to Use Artificial Intelligence", 
+    note: "Explains how AI helps analyze data and improve trading decisions.", 
+    link: "https://www.forex.com/en-us/trading-guides/how-to-use-ai-in-stock-trading/"
+  },
+  { 
+    title: "Energy demand from AI", 
+    note: "Looks at how growing AI usage increases global energy consumption.", 
+    link: "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" 
+  },
+  { 
+    title: "AI data hubs in space: when will they take flight?", 
+    note: "Explores the idea of running AI data centers in space and its challenges.", 
+    link: "https://www.nature.com/articles/d41586-026-01370-6" 
+  },
 ];
 
 function SectionLabel({ children }: { children: string }) {
